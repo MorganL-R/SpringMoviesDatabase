@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 public class Actor {
     @Id
+    @Column(name = "actor_id")
+    @GeneratedValue
     private Long id;
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id", nullable = false)

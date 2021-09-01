@@ -1,10 +1,13 @@
 package com.morgan.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 @Entity
 public class Movie {
     @Id
+    @Column(name = "movie_id")
+    @GeneratedValue
     private Long id;
     @Column
     private String title;
@@ -17,6 +20,16 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Actor> actors;
 
+    public void addActor(Actor actor){
+        actor.setMovie(this);
+
+        if (actors == null){
+            actors = new HashSet<>();
+        }
+
+        actors.add(actor);
+    }
+
     public Long getId() {
         return id;
     }
@@ -27,10 +40,6 @@ public class Movie {
 
     public Set<Actor> getActors() {
         return actors;
-    }
-
-    public void setActors(Set<Actor> actors) {
-        this.actors = actors;
     }
 
     public String getTitle() {
