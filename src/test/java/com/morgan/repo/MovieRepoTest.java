@@ -28,5 +28,19 @@ public class MovieRepoTest {
         movieRepo.save(movie);
     }
 
+    @Test
+    public void testWriteMovie2(){
+        Movie movie = new Movie();
+        movie.setTitle("The Green Mile");
+        movie.setGenre("Drama");
+        movie.setRuntime(189);
+        movie.setRating("18");
+        Actor actor = new Actor();
+        actor.setName("Tom Hanks");
+        actor.setAge(65);
+        actor.setGender("Male");
+        movie.addActor(actor);
+        movieRepo.save(movie);
+    }
 
 }
