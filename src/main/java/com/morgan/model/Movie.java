@@ -1,14 +1,29 @@
 package com.morgan.model;
 
+import javax.persistence.*;
 import java.util.Set;
-
+@Entity
 public class Movie {
-
+    @Id
+    private Long id;
+    @Column
     private String title;
+    @Column
     private String genre;
+    @Column
     private int runtime;
+    @Column
     private String rating;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Actor> actors;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Set<Actor> getActors() {
         return actors;
