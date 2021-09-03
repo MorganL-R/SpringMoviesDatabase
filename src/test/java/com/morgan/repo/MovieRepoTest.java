@@ -16,6 +16,7 @@ public class MovieRepoTest {
     @Test
     public void testWriteMovie() {
         Movie movie = new Movie();
+        movie.setId((long) 1);
         movie.setTitle("Spiral");
         movie.setGenre("Thriller");
         movie.setRuntime(93);
@@ -31,6 +32,7 @@ public class MovieRepoTest {
     @Test
     public void testWriteMovie2(){
         Movie movie = new Movie();
+        movie.setId((long)2);
         movie.setTitle("The Green Mile");
         movie.setGenre("Drama");
         movie.setRuntime(189);

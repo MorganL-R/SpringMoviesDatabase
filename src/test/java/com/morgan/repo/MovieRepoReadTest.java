@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +25,7 @@ public class MovieRepoReadTest {
 
     public void insertMovies() {
         Movie movie = new Movie();
+        movie.setId((long)1);
         movie.setTitle("Spiral");
         movie.setGenre("Thriller");
         movie.setRuntime(93);
@@ -37,15 +39,16 @@ public class MovieRepoReadTest {
 
 
         Movie movie2 = new Movie();
-        movie.setTitle("The Green Mile");
-        movie.setGenre("Drama");
-        movie.setRuntime(189);
-        movie.setRating("18");
+        movie2.setId((long)2);
+        movie2.setTitle("The Green Mile");
+        movie2.setGenre("Drama");
+        movie2.setRuntime(189);
+        movie2.setRating("18");
         Actor actor2 = new Actor();
-        actor.setName("Tom Hanks");
-        actor.setAge(65);
-        actor.setGender("Male");
-        movie.addActor(actor);
+        actor2.setName("Tom Hanks");
+        actor2.setAge(65);
+        actor2.setGender("Male");
+        movie2.addActor(actor2);
         movieRepo.save(movie2);
     }
 
@@ -55,6 +58,10 @@ public class MovieRepoReadTest {
         List <Movie> movies = movieRepo.findAll();
         assertFalse(movies.isEmpty());
         assertEquals(2, movies.size());
+        for (Movie movie : movies) {
+            System.out.println(movie);
+        }
+
     }
 
 }
