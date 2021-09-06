@@ -2,6 +2,7 @@ package com.morgan.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 @Entity
 public class Movie {
@@ -41,6 +42,13 @@ public class Movie {
     public Set<Actor> getActors() {
         return actors;
     }
+
+/*    public void setActors(Set<Actor> actors) {
+        for (Actor actor: actors) {
+            actor.setMovie(this);
+        }
+        this.actors = actors;
+    }*/
 
     public String getTitle() {
         return title;
@@ -84,5 +92,18 @@ public class Movie {
                 ", rating='" + rating + '\'' +
                 ", actors=" + actors +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(id, movie.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

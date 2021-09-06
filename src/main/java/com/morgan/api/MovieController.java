@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController()
+@RestController
+@RequestMapping(value = "/movies")
 public class MovieController {
 
     @Autowired
@@ -15,7 +16,7 @@ public class MovieController {
     /**
      * This is a POST API
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/movies")
+    @RequestMapping(method = RequestMethod.POST)
     public void createMovie(@RequestBody Movie movie){
         movieRepo.save(movie);
     }
@@ -24,7 +25,7 @@ public class MovieController {
      *
      This is a GET API
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/movies/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Movie getMovie(@PathVariable Long id){
         return movieRepo.getById(id);
     }
@@ -34,16 +35,19 @@ public class MovieController {
      * This is a PUT API
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateMovie(Movie movie){
-
+    public void updateMovie(Movie movie) throws Exception{
+        if (movie.getId() == null) {
+            throw new Exception("Movie has not been found.");
+        }
+        movieRepo.save(movie);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteMovie(){
-
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void deleteMovie(@PathVariable Long id) {
+        movieRepo.deleteById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/movies")
+    @RequestMapping(method = RequestMethod.GET)
     public List <Movie> getAllMovies(){
         return movieRepo.findAll();
     }
