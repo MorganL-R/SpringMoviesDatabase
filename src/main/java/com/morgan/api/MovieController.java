@@ -48,7 +48,7 @@ public class MovieController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable Long id, @RequestBody Movie movie) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id, Movie movie) {
         if (movie.getId() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -57,11 +57,11 @@ public class MovieController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Movie> getAllMovies(@RequestBody Movie movie){
-        if (movie.getId() != null) {
+    public ResponseEntity<Movie> getAllMovies(){
+        movieRepo.findAll();
+        if (movieRepo == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            movieRepo.findAll();
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
