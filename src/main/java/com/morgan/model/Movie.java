@@ -43,12 +43,12 @@ public class Movie {
         return actors;
     }
 
-/*    public void setActors(Set<Actor> actors) {
+    public void setActors(Set<Actor> actors) {
         for (Actor actor: actors) {
             actor.setMovie(this);
         }
         this.actors = actors;
-    }*/
+    }
 
     public String getTitle() {
         return title;

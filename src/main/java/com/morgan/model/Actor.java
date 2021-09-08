@@ -1,5 +1,7 @@
 package com.morgan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Actor {
     @GeneratedValue
     private Long id;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id", nullable = false)
     private Movie movie;
     @Column

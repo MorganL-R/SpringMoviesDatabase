@@ -3,6 +3,8 @@ package com.morgan.api;
 import com.morgan.model.Movie;
 import com.morgan.repo.MovieRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,9 @@ public class MovieController {
      * This is a POST API
      */
     @RequestMapping(method = RequestMethod.POST)
-    public void createMovie(@RequestBody Movie movie){
+    public ResponseEntity<Void> createMovie(@RequestBody Movie movie){
         movieRepo.save(movie);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /**
@@ -35,11 +38,12 @@ public class MovieController {
      * This is a PUT API
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateMovie(Movie movie) throws Exception{
+    public ResponseEntity<Void> updateMovie(@RequestBody Movie movie){
         if (movie.getId() == null) {
-            throw new Exception("Movie has not been found.");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         movieRepo.save(movie);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")

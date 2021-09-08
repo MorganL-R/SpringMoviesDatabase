@@ -1,20 +1,15 @@
 package com.morgan.repo;
 
-
 import com.morgan.model.Actor;
 import com.morgan.model.Movie;
-
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 @AutoConfigureTestDatabase
 @SpringBootTest
@@ -22,10 +17,9 @@ public class MovieRepoReadTest {
     @Autowired
     private MovieRepo movieRepo;
 
-
     public void insertMovies() {
+        movieRepo.deleteAll();
         Movie movie = new Movie();
-        movie.setId((long)1);
         movie.setTitle("Spiral");
         movie.setGenre("Thriller");
         movie.setRuntime(93);
@@ -37,9 +31,7 @@ public class MovieRepoReadTest {
         movie.addActor(actor);
         movieRepo.save(movie);
 
-
         Movie movie2 = new Movie();
-        movie2.setId((long)2);
         movie2.setTitle("The Green Mile");
         movie2.setGenre("Drama");
         movie2.setRuntime(189);
