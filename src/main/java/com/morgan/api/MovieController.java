@@ -2,6 +2,8 @@ package com.morgan.api;
 
 import com.morgan.model.Movie;
 import com.morgan.repo.MovieRepo;
+import com.sun.xml.bind.v2.model.core.ID;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +36,11 @@ public class MovieController {
     }
 
     /**
-     *
      * This is a PUT API
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> updateMovie(@RequestBody Movie movie){
-        if (movie.getId() == null) {
+        if (movie.getId() != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         movieRepo.save(movie);
@@ -47,13 +48,22 @@ public class MovieController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void deleteMovie(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id, @RequestBody Movie movie) {
+        if (movie.getId() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         movieRepo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List <Movie> getAllMovies(){
-        return movieRepo.findAll();
+    public ResponseEntity<Movie> getAllMovies(@RequestBody Movie movie){
+        if (movie.getId() != null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            movieRepo.findAll();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
 }
