@@ -57,13 +57,12 @@ public class MovieController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Void> getAllMovies(){
+    public ResponseEntity<List<Movie>> getAllMovies(){
         List<Movie> movies = movieRepo.findAll();
         if (movies.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-            movieRepo.findAll();
-            return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
 }
