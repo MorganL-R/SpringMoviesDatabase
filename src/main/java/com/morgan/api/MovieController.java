@@ -39,8 +39,8 @@ public class MovieController {
      * This is a PUT API
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateMovie(@RequestBody Movie movie){
-        if (movie.getId() != null) {
+    public ResponseEntity<Void> updateMovie(@RequestBody Movie movie, @PathVariable Long id){
+        if (movieRepo.getById(id) == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         movieRepo.save(movie);
@@ -48,8 +48,8 @@ public class MovieController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable Long id, Movie movie) {
-        if (movie.getId() == null) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
+        if (movieRepo.getById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         movieRepo.deleteById(id);
