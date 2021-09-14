@@ -39,8 +39,8 @@ public class MovieController {
      * This is a PUT API
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateMovie(@RequestBody Movie movie, @PathVariable Long id){
-        if (movieRepo.getById(id) == null) {
+    public ResponseEntity<Void> updateMovie(@RequestBody Movie movie){
+        if (movie.getId() == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         movieRepo.save(movie);
