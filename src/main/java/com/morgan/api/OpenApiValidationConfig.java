@@ -1,4 +1,4 @@
-package com.hunsley.oai.validator.example;
+package com.morgan.api;
 
 import com.atlassian.oai.validator.springmvc.OpenApiValidationFilter;
 import com.atlassian.oai.validator.springmvc.OpenApiValidationInterceptor;
@@ -25,7 +25,7 @@ public class OpenApiValidationConfig {
     }
 
     @Bean
-    public WebMvcConfigurer addOpenApiValidationInterceptor(@Value("movies-openapi.json") final Resource apiSpecification) throws IOException {
+    public WebMvcConfigurer addOpenApiValidationInterceptor(@Value("classpath:movies-openapi.json") final Resource apiSpecification) throws IOException {
         final EncodedResource specResource = new EncodedResource(apiSpecification, StandardCharsets.UTF_8);
         final OpenApiValidationInterceptor openApiValidationInterceptor = new OpenApiValidationInterceptor(specResource);
         return new WebMvcConfigurer() {

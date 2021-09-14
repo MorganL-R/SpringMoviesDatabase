@@ -9,40 +9,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class MovieExceptionHandler {
-
-
-
-
-
-
-        @ExceptionHandler(InvalidRequestException.class)
-        public ResponseEntity<ErrorValidationReport> handle(final InvalidRequestException invalidRequestException) {
-            final ErrorValidationReport report = new ErrorValidationReport(invalidRequestException
-                    .getValidationReport().getMessages());
-            return new ResponseEntity<>(report, HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-
-        public static class ErrorValidationReport {
-
-            private String errorCode = "1000";
-            private String errorDescription = "";
-
-            public ErrorValidationReport(final List<ValidationReport.Message> messages) {
-                StringBuilder builder = new StringBuilder();
-                for (ValidationReport.Message msg  :messages) {
-                    builder.append(msg.getMessage()).append("\n");
-                }
-
-                errorDescription = builder.toString();
-            }
-
-            public String getErrorCode() {
-                return errorCode;
-            }
-
-            public String getErrorDescription() {
-                return errorDescription;
-            }
-        }
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<List<ValidationReport.Message>> handle(final InvalidRequestException invalidRequestException) {
+        return new ResponseEntity<>(invalidRequestException.getValidationReport().getMessages(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
+}
 

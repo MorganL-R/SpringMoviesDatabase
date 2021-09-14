@@ -3,4 +3,5 @@
 /Users/morganlawley-robinson/IdeaProjects/SpringMoviesDatabase/src/main/java/com/morgan/model/Actor.java
 /Users/morganlawley-robinson/IdeaProjects/SpringMoviesDatabase/src/main/java/com/morgan/api/MovieExceptionHandler.java
 /Users/morganlawley-robinson/IdeaProjects/SpringMoviesDatabase/src/main/java/com/morgan/repo/MovieRepo.java
+/Users/morganlawley-robinson/IdeaProjects/SpringMoviesDatabase/src/main/java/com/morgan/api/OpenApiValidationConfig.java
 /Users/morganlawley-robinson/IdeaProjects/SpringMoviesDatabase/src/main/java/com/morgan/api/MovieController.java

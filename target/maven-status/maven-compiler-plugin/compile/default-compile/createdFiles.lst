@@ -2,6 +2,7 @@ com/morgan/model/Movie.class
 com/morgan/Application.class
 com/morgan/api/MovieController.class
 com/morgan/model/Actor.class
+com/morgan/api/OpenApiValidationConfig$1.class
 com/morgan/repo/MovieRepo.class
-com/morgan/api/MovieExceptionHandler$ErrorValidationReport.class
+com/morgan/api/OpenApiValidationConfig.class
 com/morgan/api/MovieExceptionHandler.class
