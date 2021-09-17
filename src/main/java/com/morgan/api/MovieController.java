@@ -21,9 +21,9 @@ public class MovieController {
      * This is a POST API
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> createMovie(@RequestBody Movie movie){
+    public ResponseEntity<Long> createMovie(@RequestBody Movie movie){
         movieRepo.save(movie);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(movie.getId(), HttpStatus.CREATED);
     }
 
     /**
