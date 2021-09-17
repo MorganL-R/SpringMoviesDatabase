@@ -1,10 +1,12 @@
 package com.morgan.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIncludeProperties({"id", "name", "age", "gender"})
 public class Actor {
     @Id
     @Column(name = "actor_id")

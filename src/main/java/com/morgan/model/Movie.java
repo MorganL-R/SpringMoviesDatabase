@@ -1,10 +1,13 @@
 package com.morgan.model;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 @Entity
+@JsonIncludeProperties({"id", "title", "genre", "runtime", "rating", "actors"})
 public class Movie {
     @Id
     @Column(name = "movie_id")
@@ -20,6 +23,7 @@ public class Movie {
     private String rating;
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Actor> actors;
+
 
     public void addActor(Actor actor){
         actor.setMovie(this);
